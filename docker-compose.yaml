@@ -1,0 +1,61 @@
+version: '3'
+services:
+  proxy1:
+    image: 'demo-proxy'
+    hostname: "proxy1"
+    ports:
+      - 10001:10001
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.11
+        ipv6_address: 2001:3984:3989::11
+  proxy2:
+    image: 'demo-proxy'
+    hostname: "proxy2"
+    ports:
+        - 10002:10001
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.12
+        ipv6_address: 2001:3984:3989::12
+  master:
+    image: 'demo-wildfly'
+    command: "/opt/jboss/wildfly/bin/domain.sh -b master -bmanagement master --host-config=host-master.xml"
+    hostname: "master"
+    ports:
+      - 9990:9990
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.21
+        ipv6_address: 2001:3984:3989::21
+  slave1:
+    image: 'demo-wildfly'
+    command: "/opt/jboss/wildfly/bin/domain.sh -Djboss.domain.master.address=master -b slave1 -bmanagement slave1 --host-config=host-slave1.xml"
+    hostname: "slave1"
+    depends_on:
+        - master
+    ports:
+        - 18080:8080
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.22
+        ipv6_address: 2001:3984:3989::22
+  slave2:
+    image: 'demo-wildfly'
+    command: "/opt/jboss/wildfly/bin/domain.sh -Djboss.domain.master.address=master -b slave2 -bmanagement slave2 --host-config=host-slave2.xml"
+    hostname: "slave2"
+    depends_on:
+        - master
+    ports:
+        - 28080:8080
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.23
+        ipv6_address: 2001:3984:3989::23
+networks:
+  app_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.16.238.0/24"
+        - subnet: "2001:3984:3989::/64"

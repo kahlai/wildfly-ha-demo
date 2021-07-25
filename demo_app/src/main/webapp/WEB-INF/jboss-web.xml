@@ -1,0 +1,16 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>
+<jboss-web>
+    <replication-config>
+        <replication-trigger>SET_AND_NON_PRIMITIVE_GET</replication-trigger>
+        <replication-granularity>SESSION</replication-granularity>
+        <replication-field-batch-mode>true</replication-field-batch-mode>
+    </replication-config>
+</jboss-web>-->
+<jboss-web xmlns="http://www.jboss.com/xml/ns/javaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.jboss.com/xml/ns/javaee http://www.jboss.org/j2ee/schema/jboss-web_10_0.xsd">
+   <replication-config>
+      <replication-trigger>SET_AND_GET</replication-trigger>
+      <replication-granularity>SESSION</replication-granularity>
+    </replication-config>
+</jboss-web>
