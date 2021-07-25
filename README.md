@@ -1,12 +1,11 @@
 
 # Wildfly Session Replication Demo
 
-This repository contain artifacts for demostrate wildfly HA with jbcs http server as frontend proxy
+This repository contain artifacts for demostrate wildfly HA with wildfly (undertow) as frontend load balancer.
 
 ## Requirements
 
 1. Docker / Docker compose https://docs.docker.com/compose/install/
-2. Access to [Red Hat JBoss Core Services Apache HTTP Server 2.4.37 for RHEL 7 x86_64](https://access.redhat.com/jbossnetwork/restricted/softwareDetail.html?softwareId=75551&product=core.service.apachehttp&version=&downloadType=distributions)
 3. Java / Maven packge (Optional)
 
 ## Topology
@@ -15,25 +14,13 @@ This repository contain artifacts for demostrate wildfly HA with jbcs http serve
 
 | Hostname | Private IP address | Expose Port | Description                 |
 | -------- | ------------------ | ----------- | --------------------------- |
-| proxy1   | 172.16.238.11      | 10001       | Apache HTTP Server          |
-| proxy2   | 172.16.238.12      | 10002       | Apache HTTP Server          |
+| proxy1   | 172.16.238.11      | 10001       | Load Balancer (Wildfly)     |
+| proxy2   | 172.16.238.12      | 10002       | Load Balancer (Wildfly)     |
 | master   | 172.16.238.21      | 9990        | Domain Controller (Wildfly) |
 | slave1   | 172.16.238.22      | 18080       | Host Controller 1 (Wildfly) |
 | slave2   | 172.16.238.23      | 28080       | Host Controller 2 (Wildfly) |
 
 
-
-## Building demo-proxy docker image
-
-1. Download the RedHat [Red Hat JBoss Core Services Apache HTTP Server 2.4.37 for RHEL 7 x86_64](https://access.redhat.com/jbossnetwork/restricted/softwareDetail.html?softwareId=75551&product=core.service.apachehttp&version=&downloadType=distributions)
-
-2. Copy and place it under "demo_proxy" folder
-3. Run docker build
-
-```
-cd demo_proxy
-docker build -t demo-proxy .
-```
 
 ## Building demo-wildly docker image
 
@@ -60,20 +47,6 @@ docker-compose up
 ```
 
 
-
-## Test the load balancer
-
-1. Access the mod cluster manager, confirm you can see both server-one and server-two registered themself.
-
-```
-http://localhost:10001/mod_cluster-manager
-
-or
-
-http://localhost:10002/mod_cluster-manager
-```
-
-![image-20210725221629890](./img/image-20210725221629890.png)
 
 ## Deploy the demo application
 
@@ -132,11 +105,7 @@ http://localhost:10001/my-webapp/
 
 ![image-20210725222657555](./img/image-20210725222657555.png)
 
-5. Confirm the load balancer has removed server-one (should be auto)
-
-![image-20210725223148685](./img/image-20210725223148685.png)
-
-6. Refresh test page from load balancer and notice the change in Hostname and Server name (slave1->slave2, server-one -> server-two, Notice the session id remain the same and the Number should increment from previous number.
+5. Refresh test page from load balancer and notice the change in Hostname and Server name (slave1->slave2, server-one -> server-two, Notice the session id remain the same and the Number should increment from previous number.
 
 ```
 http://localhost:10001/my-webapp/
