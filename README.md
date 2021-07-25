@@ -98,7 +98,7 @@ password : password
 
 4. Select demo_app/target/my-webapp.war to upload, click next and finish
 
-![image-20210725215758758](/Users/laikahhoe/Projects/wildfly/wildfly-cluster-demo/img/image-20210725215758758.png)
+![image-20210725215758758](./img/image-20210725215758758.png)
 
 
 
