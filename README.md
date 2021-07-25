@@ -88,7 +88,7 @@ username : admin
 password : password
 ```
 
-2.  Deployment Application
+2.  Click on deployment tab
 
 ![image-20210725215341011](./img/image-20210725215341011.png)
 
