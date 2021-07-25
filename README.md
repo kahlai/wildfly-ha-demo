@@ -1,6 +1,3 @@
----
-typora-copy-images-to: ./img
----
 
 # Wildfly Session Replication Demo
 
@@ -71,7 +68,7 @@ docker-compose up
 ```
 http://localhost:10001/mod_cluster-manager
 
-or 
+or
 
 http://localhost:10002/mod_cluster-manager
 ```
@@ -146,4 +143,3 @@ http://localhost:10001/my-webapp/
 ```
 
 ![image-20210725223009920](./img/image-20210725223009920.png)
-
