@@ -22,13 +22,13 @@ This repository contain artifacts for demostrate wildfly HA with wildfly (undert
 
 
 
-## Building demo-wildly docker image
+## Building demo-wildly docker image (Optional)
 
 1. Run docker build
 
 ```
 cd demo_wildfly
-docker build -t demo-wildfly .
+docker build -t quay.io/kahlai/demo-wildfly .
 ```
 
 ## Build the demo application (Optional)

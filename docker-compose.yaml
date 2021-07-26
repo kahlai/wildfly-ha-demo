@@ -1,7 +1,7 @@
 version: '3'
 services:
   proxy1:
-    image: 'demo-wildfly'
+    image: 'quay.io/kahlai/demo-wildfly'
     command: "/opt/jboss/wildfly/bin/standalone.sh -b proxy1 -bprivate=proxy1 -Djboss.mcmp.port=10001 -c standalone-load-balancer.xml"
     hostname: "proxy1"
     ports:
@@ -11,7 +11,7 @@ services:
         ipv4_address: 172.16.238.11
         ipv6_address: 2001:3984:3989::11
   proxy2:
-    image: 'demo-wildfly'
+    image: 'quay.io/kahlai/demo-wildfly'
     command: "/opt/jboss/wildfly/bin/standalone.sh -b proxy2 -bprivate=proxy2 -Djboss.mcmp.port=10001 -c standalone-load-balancer.xml"
     ports:
         - 10002:10001
@@ -20,7 +20,7 @@ services:
         ipv4_address: 172.16.238.12
         ipv6_address: 2001:3984:3989::12
   master:
-    image: 'demo-wildfly'
+    image: 'quay.io/kahlai/demo-wildfly'
     command: "/opt/jboss/wildfly/bin/domain.sh -b master -bmanagement master --host-config=host-master.xml"
     hostname: "master"
     ports:
@@ -42,7 +42,7 @@ services:
         ipv4_address: 172.16.238.22
         ipv6_address: 2001:3984:3989::22
   slave2:
-    image: 'demo-wildfly'
+    image: 'quay.io/kahlai/demo-wildfly'
     command: "/opt/jboss/wildfly/bin/domain.sh -Djboss.domain.master.address=master -b slave2 -bmanagement slave2 --host-config=host-slave2.xml"
     hostname: "slave2"
     depends_on:
