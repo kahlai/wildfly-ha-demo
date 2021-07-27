@@ -30,7 +30,7 @@ services:
         ipv4_address: 172.16.238.21
         ipv6_address: 2001:3984:3989::21
   slave1:
-    image: 'demo-wildfly'
+    image: 'quay.io/kahlai/demo-wildfly'
     command: "/opt/jboss/wildfly/bin/domain.sh -Djboss.domain.master.address=master -b slave1 -bmanagement slave1 --host-config=host-slave1.xml"
     hostname: "slave1"
     depends_on:
